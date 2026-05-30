@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* Modern cyber — violet gradient theme */
+    --bg-base: 260 45% 4%;
+    --bg-surface: 263 38% 8%;
+    --bg-elevated: 262 32% 12%;
+
+    --violet-50: 270 100% 98%;
+    --violet-200: 269 100% 92%;
+    --violet-300: 269 97% 85%;
+    --violet-400: 270 95% 75%;
+    --violet-500: 271 91% 65%;
+    --violet-600: 271 81% 56%;
+    --violet-700: 272 72% 47%;
+    --violet-900: 273 60% 25%;
+
+    --text-primary: 270 30% 96%;
+    --text-secondary: 260 20% 78%;
+    --text-muted: 260 12% 55%;
+
+    --border-soft: 268 35% 22%;
+    --border-violet: 271 70% 45%;
+}
+
+@layer base {
+    :root {
+        --background: var(--bg-base);
+        --foreground: var(--text-primary);
+        --card: var(--bg-surface);
+        --card-foreground: var(--text-primary);
+        --popover: var(--bg-elevated);
+        --popover-foreground: var(--text-primary);
+        --primary: var(--violet-500);
+        --primary-foreground: 0 0% 100%;
+        --secondary: var(--bg-elevated);
+        --secondary-foreground: var(--text-primary);
+        --muted: var(--bg-elevated);
+        --muted-foreground: var(--text-muted);
+        --accent: var(--violet-600);
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 75% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --border: var(--border-soft);
+        --input: var(--bg-elevated);
+        --ring: var(--violet-500);
+        --radius: 0.875rem;
+    }
+}
+
+* {
+    border-color: hsl(var(--border));
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'ss01', 'cv11';
+    overflow-x: hidden;
+}
+
+.font-display {
+    font-family: 'Manrope', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Selection */
+::selection {
+    background: hsl(var(--violet-600) / 0.55);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: hsl(var(--bg-base));
+}
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--violet-900));
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--violet-700));
+}
+
+/* ---------- App-specific decorative ---------- */
+
+.grid-bg {
+    background-image:
+        linear-gradient(hsl(var(--violet-500) / 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, hsl(var(--violet-500) / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 80%);
+}
+
+.noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+}
+
+.glow-violet {
+    box-shadow:
+        0 0 0 1px hsl(var(--violet-500) / 0.18),
+        0 8px 30px -8px hsl(var(--violet-600) / 0.35),
+        inset 0 1px 0 hsl(var(--violet-300) / 0.06);
+}
+
+.glow-violet-strong {
+    box-shadow:
+        0 0 0 1px hsl(var(--violet-500) / 0.35),
+        0 12px 60px -10px hsl(var(--violet-500) / 0.55),
+        inset 0 1px 0 hsl(var(--violet-300) / 0.12);
+}
+
+.gradient-violet-text {
+    background: linear-gradient(120deg,
+        hsl(var(--violet-200)) 0%,
+        hsl(var(--violet-400)) 35%,
+        hsl(var(--violet-500)) 65%,
+        hsl(var(--violet-300)) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-violet-border {
+    position: relative;
+    background: linear-gradient(hsl(var(--bg-surface)), hsl(var(--bg-surface))) padding-box,
+                linear-gradient(135deg,
+                    hsl(var(--violet-500)) 0%,
+                    hsl(var(--violet-700)) 50%,
+                    hsl(var(--violet-400)) 100%) border-box;
+    border: 1px solid transparent;
+}
+
+.gradient-violet-bg {
+    background: linear-gradient(135deg,
+        hsl(var(--violet-700)) 0%,
+        hsl(var(--violet-500)) 50%,
+        hsl(var(--violet-400)) 100%);
+}
+
+.aurora {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+.aurora::before,
+.aurora::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+}
+.aurora::before {
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, hsl(271 91% 65% / 0.9), transparent 70%);
+    top: -180px;
+    left: -120px;
+    animation: floatA 18s ease-in-out infinite alternate;
+}
+.aurora::after {
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, hsl(252 95% 58% / 0.7), transparent 70%);
+    bottom: -260px;
+    right: -160px;
+    animation: floatB 22s ease-in-out infinite alternate;
+}
+@keyframes floatA {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(80px, 60px) scale(1.15); }
+}
+@keyframes floatB {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(-60px, -40px) scale(1.1); }
+}
+
+/* Reveal on view */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.2,0.7,0.2,1), transform 0.9s cubic-bezier(0.2,0.7,0.2,1);
+}
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom cursor accent on interactive */
+.cursor-violet {
+    cursor: pointer;
+}
+
+/* Section label badge */
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid hsl(var(--violet-500) / 0.35);
+    border-radius: 999px;
+    background: hsl(var(--violet-500) / 0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: hsl(var(--violet-300));
+}
+
+/* Timeline */
+.tl-rail {
+    background: linear-gradient(180deg,
+        transparent 0%,
+        hsl(var(--violet-500) / 0.7) 8%,
+        hsl(var(--violet-500) / 0.7) 92%,
+        transparent 100%);
+}
+
+/* Skill chip */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--violet-500) / 0.28);
+    background: hsl(var(--violet-500) / 0.06);
+    font-size: 0.78rem;
+    color: hsl(var(--violet-200));
+    font-family: 'JetBrains Mono', monospace;
+}
