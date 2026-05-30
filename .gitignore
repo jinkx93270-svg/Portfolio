@@ -78,6 +78,14 @@ agenthub/agents/youtube/db
 
 memory/test_credentials.md
 
+# ----- Fichiers internes Emergent (ne pas publier sur GitHub) -----
+/memory/
+/.emergent/
+/test_reports/
+/test_result.md
+/tests/
+/scripts/
+
 # Mobile development
 android-sdk/
 .env
