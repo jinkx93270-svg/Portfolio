@@ -1,6 +1,5 @@
 import { ArrowDown, Download, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 export default function Hero() {
@@ -10,7 +9,6 @@ export default function Hero() {
       data-testid="hero-section"
       className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden"
     >
-      <SectionDecor variant="hero" />
       <div className="absolute inset-0 grid-bg pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 md:px-10 grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center w-full">

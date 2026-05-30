@@ -1,5 +1,4 @@
 import { BookMarked, CheckCircle2 } from "lucide-react";
-import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 export default function Formation() {
@@ -7,9 +6,8 @@ export default function Formation() {
     <section
       id="formation"
       data-testid="formation-section"
-      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10"
     >
-      <SectionDecor variant="formation" />
       <div className="max-w-7xl mx-auto">
         <div className="reveal max-w-3xl">
           <span className="section-label">

@@ -1,5 +1,4 @@
 import { GraduationCap, BookOpen, Sparkles, Cpu } from "lucide-react";
-import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 const iconFor = (type) => {
@@ -15,7 +14,6 @@ export default function TimelineSection() {
       data-testid="timeline-section"
       className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
     >
-      <SectionDecor variant="parcours" />
       <div className="max-w-5xl mx-auto relative">
         <div className="reveal">
           <span className="section-label">

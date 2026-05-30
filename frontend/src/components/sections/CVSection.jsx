@@ -1,6 +1,5 @@
 import { FileDown, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 export default function CVSection() {
@@ -8,9 +7,8 @@ export default function CVSection() {
     <section
       id="cv"
       data-testid="cv-section"
-      className="relative py-16 sm:py-20 px-5 sm:px-6 md:px-10 overflow-hidden"
+      className="relative py-16 sm:py-20 px-5 sm:px-6 md:px-10"
     >
-      <SectionDecor variant="cv" />
       <div className="max-w-5xl mx-auto reveal">
         <div className="hover-card gradient-violet-border rounded-3xl p-7 sm:p-10 lg:p-12 glow-violet-strong relative overflow-hidden">
           <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-6 sm:gap-8 items-center">
