@@ -50,7 +50,7 @@ export default function Portfolio() {
   return (
     <div
       data-testid="portfolio-page"
-      className="min-h-screen relative bg-[hsl(var(--bg-base))] text-white"
+      className="min-h-screen relative text-white"
     >
       <BackgroundFX />
       <Navbar />

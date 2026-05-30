@@ -116,9 +116,79 @@ body {
 /* Grid de fond dynamique (sans masque, pour BackgroundFX) */
 .grid-bg-fx {
     background-image:
-        linear-gradient(hsl(var(--violet-500) / 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, hsl(var(--violet-500) / 0.05) 1px, transparent 1px);
+        linear-gradient(hsl(var(--violet-500) / 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, hsl(var(--violet-500) / 0.07) 1px, transparent 1px);
     background-size: 56px 56px;
+}
+
+/* ----- Animations du fond dynamique (BackgroundFX) ----- */
+
+/* Combine animation continue + parallax scroll via CSS variable --sy */
+@keyframes bgFxGridDrift {
+    0%   { background-position: 0 calc(0px + var(--sy, 0px)); }
+    100% { background-position: 56px calc(56px + var(--sy, 0px)); }
+}
+.bg-fx-grid-anim {
+    animation: bgFxGridDrift 14s linear infinite;
+}
+
+@keyframes bgFxBeam {
+    0%   { transform: translate3d(0, var(--sy, 0px), 0) rotate(8deg); opacity: 0.55; }
+    50%  { transform: translate3d(40px, var(--sy, 0px), 0) rotate(14deg); opacity: 0.9; }
+    100% { transform: translate3d(0, var(--sy, 0px), 0) rotate(8deg); opacity: 0.55; }
+}
+.bg-fx-beam-anim {
+    animation: bgFxBeam 18s ease-in-out infinite;
+}
+
+@keyframes bgFxOrbA {
+    0%   { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+    33%  { transform: translate3d(60px, calc(50px + var(--sy, 0px)), 0) scale(1.08); }
+    66%  { transform: translate3d(-30px, calc(120px + var(--sy, 0px)), 0) scale(0.96); }
+    100% { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+}
+.bg-fx-orb-a {
+    animation: bgFxOrbA 22s ease-in-out infinite;
+}
+
+@keyframes bgFxOrbB {
+    0%   { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+    33%  { transform: translate3d(-50px, calc(-40px + var(--sy, 0px)), 0) scale(1.1); }
+    66%  { transform: translate3d(40px, calc(-80px + var(--sy, 0px)), 0) scale(0.92); }
+    100% { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+}
+.bg-fx-orb-b {
+    animation: bgFxOrbB 26s ease-in-out infinite;
+}
+
+@keyframes bgFxOrbC {
+    0%   { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+    50%  { transform: translate3d(80px, calc(-60px + var(--sy, 0px)), 0) scale(1.15); }
+    100% { transform: translate3d(0, var(--sy, 0px), 0) scale(1); }
+}
+.bg-fx-orb-c {
+    animation: bgFxOrbC 30s ease-in-out infinite;
+}
+
+/* Particules flottantes */
+.bg-fx-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 999px;
+    background: hsl(var(--violet-300));
+    box-shadow: 0 0 8px hsl(var(--violet-400) / 0.9);
+    opacity: 0;
+    animation-name: bgFxFloat;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+@keyframes bgFxFloat {
+    0%   { transform: translate3d(0, 0, 0);   opacity: 0; }
+    15%  { opacity: 0.85; }
+    50%  { transform: translate3d(-30px, -80px, 0); opacity: 0.6; }
+    85%  { opacity: 0.4; }
+    100% { transform: translate3d(20px, -160px, 0); opacity: 0; }
 }
 
 .noise {
