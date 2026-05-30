@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -43,10 +44,9 @@ export default function Contact() {
     <section
       id="contact"
       data-testid="contact-section"
-      className="relative py-24 sm:py-32 px-6 md:px-10 overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
     >
-      <div className="absolute inset-x-0 -top-40 h-[500px] aurora opacity-60" />
-
+      <SectionDecor variant="contact" />
       <div className="max-w-6xl mx-auto relative">
         <div className="reveal max-w-3xl">
           <span className="section-label">

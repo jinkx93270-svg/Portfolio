@@ -1,4 +1,5 @@
 import { Compass, Target, Sparkles, Heart } from "lucide-react";
+import SectionDecor from "@/components/SectionDecor";
 import { portfolioData as d } from "@/data/portfolioData";
 
 const Card = ({ icon: Icon, title, children, testid }) => (
@@ -21,8 +22,9 @@ export default function About() {
     <section
       id="about"
       data-testid="about-section"
-      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10"
+      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
     >
+      <SectionDecor variant="about" />
       <div className="max-w-7xl mx-auto">
         <div className="max-w-3xl reveal">
           <span className="section-label">

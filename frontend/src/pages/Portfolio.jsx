@@ -47,6 +47,57 @@ export default function Portfolio() {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
+  // Active section highlight + blur out-of-focus sections
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    if (!sections.length) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const center = window.innerHeight / 2;
+      // Prefer the section currently covering the viewport center
+      let active = sections.find((s) => {
+        const r = s.getBoundingClientRect();
+        return r.top <= center && r.bottom >= center;
+      });
+      // Fallback : closest section by edge distance
+      if (!active) {
+        let bestDist = Infinity;
+        sections.forEach((s) => {
+          const r = s.getBoundingClientRect();
+          const d = Math.min(
+            Math.abs(r.top - center),
+            Math.abs(r.bottom - center)
+          );
+          if (d < bestDist) {
+            bestDist = d;
+            active = s;
+          }
+        });
+      }
+      sections.forEach((s) => {
+        if (s === active) {
+          s.classList.add("section-active");
+          s.classList.remove("section-far");
+        } else {
+          s.classList.remove("section-active");
+          s.classList.add("section-far");
+        }
+      });
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <div
       data-testid="portfolio-page"
