@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-bts-sio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio BTS SIO SISR — Ennadhir Benarous (proxy racine vers ./frontend pour les hébergeurs)",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "preinstall": "echo \"➜ Installation des dépendances frontend dans ./frontend\"",
+    "install:frontend": "cd frontend && yarn install --frozen-lockfile",
+    "postinstall": "cd frontend && yarn install --frozen-lockfile",
+    "build": "cd frontend && yarn build",
+    "start": "cd frontend && yarn start",
+    "serve": "cd frontend && npx serve -s build -l ${PORT:-3000}"
+  }
+}

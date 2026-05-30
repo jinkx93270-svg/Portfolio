@@ -1,0 +1,42 @@
+# Blueprint Render — déploie le portfolio (frontend statique) + backend FastAPI
+# Ce fichier est lu automatiquement par Render quand on connecte le repo.
+# Doc : https://render.com/docs/blueprint-spec
+
+services:
+  # ---------- FRONTEND : site statique React ----------
+  - type: web
+    name: portfolio-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: yarn install --frozen-lockfile && yarn build
+    staticPublishPath: build
+    # Single Page App : toutes les routes renvoient vers index.html
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        sync: false   # à renseigner dans le dashboard Render (URL du service backend)
+      - key: NODE_VERSION
+        value: 20
+      - key: CI
+        value: "false"
+
+  # ---------- BACKEND : API FastAPI ----------
+  - type: web
+    name: portfolio-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGO_URL
+        sync: false   # à renseigner (ex: chaîne MongoDB Atlas)
+      - key: DB_NAME
+        value: portfolio
+      - key: CORS_ORIGINS
+        sync: false   # à renseigner avec l'URL du frontend (ex: https://portfolio-frontend.onrender.com)
+      - key: PYTHON_VERSION
+        value: 3.11.9
