@@ -12,18 +12,18 @@ export default function TimelineSection() {
     <section
       id="parcours"
       data-testid="timeline-section"
-      className="relative py-24 sm:py-32 px-6 md:px-10 overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
     >
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-[hsl(271_91%_55%/0.18)] blur-[120px] pointer-events-none" />
-
       <div className="max-w-5xl mx-auto relative">
         <div className="reveal">
           <span className="section-label">
             <Sparkles size={12} />
             Du bac au BTS
           </span>
-          <h2 className="font-display mt-5 text-4xl sm:text-5xl font-bold text-white">
-            Une <span className="gradient-violet-text">timeline</span> d'apprentissage.
+          <h2 className="font-display mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <span className="hover-title">
+              Une <span className="gradient-violet-text">timeline</span> d'apprentissage.
+            </span>
           </h2>
           <p className="mt-4 text-[hsl(var(--text-secondary))] max-w-2xl">
             Chaque étape m'a rapproché un peu plus de ce qui me passionne réellement : les
@@ -63,7 +63,7 @@ export default function TimelineSection() {
                     }`}
                   >
                     <article
-                      className={`gradient-violet-border rounded-2xl p-6 glow-violet ${
+                      className={`hover-card gradient-violet-border rounded-2xl p-6 glow-violet ${
                         isCurrent ? "glow-violet-strong" : ""
                       }`}
                     >
@@ -80,8 +80,8 @@ export default function TimelineSection() {
                           </span>
                         )}
                       </div>
-                      <h3 className="font-display text-xl font-semibold text-white">
-                        {step.title}
+                      <h3 className="font-display text-lg sm:text-xl font-semibold text-white">
+                        <span className="hover-title">{step.title}</span>
                       </h3>
                       <p className="mt-1 text-sm text-[hsl(var(--text-secondary))]">
                         {step.subtitle}

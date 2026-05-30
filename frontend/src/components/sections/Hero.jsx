@@ -7,13 +7,11 @@ export default function Hero() {
     <section
       id="hero"
       data-testid="hero-section"
-      className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden"
     >
-      <div className="absolute inset-0 grid-bg" />
-      <div className="aurora" />
-      <div className="noise" />
+      <div className="absolute inset-0 grid-bg pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 md:px-10 grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center w-full">
         {/* LEFT — text */}
         <div className="lg:col-span-7 reveal">
           <span className="section-label" data-testid="hero-label">
@@ -23,20 +21,24 @@ export default function Hero() {
 
           <h1
             data-testid="hero-title"
-            className="font-display mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight"
+            className="font-display mt-5 sm:mt-6 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.02] tracking-tight"
           >
-            <span className="text-white block">{d.identity.firstName}</span>
-            <span className="gradient-violet-text block">{d.identity.lastName}</span>
+            <span className="hover-title">
+              <span className="text-white block">{d.identity.firstName}</span>
+              <span className="gradient-violet-text block">{d.identity.lastName}</span>
+            </span>
           </h1>
 
           <p
             data-testid="hero-subtitle"
-            className="mt-6 text-lg sm:text-xl text-[hsl(var(--text-secondary))] max-w-xl leading-relaxed"
+            className="mt-5 sm:mt-6 text-base sm:text-lg lg:text-xl text-[hsl(var(--text-secondary))] max-w-xl leading-relaxed"
           >
             <span className="text-white font-medium">{d.identity.title}</span> — spécialité{" "}
             <span className="text-[hsl(var(--violet-300))] font-mono">{d.identity.subtitle}</span>.
             <br />
-            <span className="text-[hsl(var(--text-muted))] text-base">{d.identity.tagline}</span>
+            <span className="text-[hsl(var(--text-muted))] text-sm sm:text-base">
+              {d.identity.tagline}
+            </span>
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -57,7 +59,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-x-7 gap-y-2 text-sm font-mono text-[hsl(var(--text-muted))]">
+          <div className="mt-8 sm:mt-10 flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm font-mono text-[hsl(var(--text-muted))]">
             <span className="flex items-center gap-1.5">
               <MapPin size={14} className="text-[hsl(var(--violet-400))]" />
               {d.identity.location}
@@ -69,17 +71,17 @@ export default function Hero() {
 
         {/* RIGHT — portrait */}
         <div className="lg:col-span-5 reveal">
-          <div className="relative mx-auto max-w-md">
+          <div className="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-md">
             {/* Decorative frame */}
             <div className="absolute -inset-4 rounded-[2rem] gradient-violet-bg opacity-30 blur-2xl" />
             <div className="absolute -inset-1 rounded-[1.75rem] gradient-violet-bg opacity-50" />
 
-            <div className="relative gradient-violet-border rounded-[1.5rem] overflow-hidden glow-violet-strong">
+            <div className="hover-card relative gradient-violet-border rounded-[1.5rem] overflow-hidden glow-violet-strong">
               <img
                 data-testid="hero-photo"
                 src={d.identity.photo}
                 alt={`${d.identity.firstName} ${d.identity.lastName}`}
-                className="w-full h-[460px] sm:h-[520px] object-cover object-top"
+                className="w-full h-[380px] sm:h-[460px] lg:h-[520px] object-cover object-top"
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--bg-base))]/80 via-transparent to-transparent" />

@@ -16,18 +16,18 @@ export default function Competences() {
     <section
       id="competences"
       data-testid="competences-section"
-      className="relative py-24 sm:py-32 px-6 md:px-10 overflow-hidden"
+      className="relative py-20 sm:py-28 lg:py-32 px-5 sm:px-6 md:px-10 overflow-hidden"
     >
-      <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" />
-
       <div className="max-w-7xl mx-auto relative">
         <div className="reveal max-w-3xl">
           <span className="section-label">
             <Wrench size={12} />
             Compétences SISR — 1ère année
           </span>
-          <h2 className="font-display mt-5 text-4xl sm:text-5xl font-bold text-white">
-            Ce que je <span className="gradient-violet-text">construis</span> cette année.
+          <h2 className="font-display mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <span className="hover-title">
+              Ce que je <span className="gradient-violet-text">construis</span> cette année.
+            </span>
           </h2>
           <p className="mt-4 text-[hsl(var(--text-secondary))]">
             Compétences en cours d'acquisition dans le cadre de la spécialité{" "}
@@ -42,14 +42,14 @@ export default function Competences() {
               <div
                 key={c.category}
                 data-testid={`competence-card-${i}`}
-                className="reveal group gradient-violet-border rounded-2xl p-6 glow-violet hover:translate-y-[-3px] transition-all duration-500"
+                className="hover-card reveal group gradient-violet-border rounded-2xl p-6 glow-violet"
               >
                 <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[hsl(var(--violet-500)/0.18)]">
                   <span className="w-10 h-10 rounded-lg bg-[hsl(var(--violet-500)/0.14)] border border-[hsl(var(--violet-500)/0.32)] grid place-items-center">
                     <Icon size={18} className="text-[hsl(var(--violet-300))]" />
                   </span>
                   <h3 className="font-display text-base font-semibold text-white leading-tight">
-                    {c.category}
+                    <span className="hover-title">{c.category}</span>
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-2">

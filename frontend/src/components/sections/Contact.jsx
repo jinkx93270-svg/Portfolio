@@ -53,8 +53,10 @@ export default function Contact() {
             <Mail size={12} />
             Contact
           </span>
-          <h2 className="font-display mt-5 text-4xl sm:text-5xl font-bold text-white">
-            Discutons d'un <span className="gradient-violet-text">projet</span>.
+          <h2 className="font-display mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <span className="hover-title">
+              Discutons d'un <span className="gradient-violet-text">projet</span>.
+            </span>
           </h2>
           <p className="mt-4 text-[hsl(var(--text-secondary))]">
             Une question, une opportunité de stage, une remarque sur ce portfolio ? Le formulaire
@@ -71,7 +73,7 @@ export default function Contact() {
               { Icon: MapPin, label: "Localisation", value: d.contact.location },
             ].map(({ Icon, label, value, href }) => {
               const inner = (
-                <div className="flex items-start gap-4 p-5 gradient-violet-border rounded-2xl glow-violet hover:glow-violet-strong transition-all">
+                <div className="hover-card flex items-start gap-4 p-5 gradient-violet-border rounded-2xl glow-violet">
                   <span className="w-11 h-11 rounded-xl gradient-violet-bg grid place-items-center text-white shrink-0">
                     <Icon size={18} />
                   </span>
@@ -99,7 +101,7 @@ export default function Contact() {
           <form
             onSubmit={onSubmit}
             data-testid="contact-form"
-            className="reveal gradient-violet-border rounded-3xl p-7 sm:p-9 glow-violet-strong space-y-5"
+            className="hover-card reveal gradient-violet-border rounded-3xl p-6 sm:p-9 glow-violet-strong space-y-5"
           >
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
