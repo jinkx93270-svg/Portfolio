@@ -1,21 +1,47 @@
 # Portfolio BTS SIO SISR — Ennadhir Benarous
 
 Portfolio web pour le BTS SIO option SISR (CNED 2025-2026).
-Stack : React 19 (frontend) + FastAPI + MongoDB (backend).
+Stack : React 19 (frontend) + FastAPI + MongoDB (backend optionnel pour le formulaire).
 
 ## Structure
 
 ```
 /
-├── frontend/       → application React (CRA)
-├── backend/        → API FastAPI + MongoDB
-├── package.json    → proxy racine vers ./frontend (pour les hébergeurs)
-├── render.yaml     → blueprint Render (frontend + backend)
-├── vercel.json     → config Vercel
-└── netlify.toml    → config Netlify
+├── frontend/                  → application React (CRA)
+├── backend/                   → API FastAPI (optionnel)
+├── .github/workflows/         → CI/CD GitHub Pages
+├── package.json               → proxy racine
+├── render.yaml                → blueprint Render
+├── vercel.json                → config Vercel
+├── netlify.toml               → config Netlify
+└── README.md
 ```
 
-## Développement local
+## 🚀 Publication sur GitHub Pages (recommandé, le plus simple)
+
+Le repo contient déjà un workflow `.github/workflows/deploy.yml` qui build et publie automatiquement.
+
+**Étapes :**
+
+1. Pousser le repo sur GitHub.
+2. Sur GitHub : **Settings → Pages → Source : `GitHub Actions`**.
+3. Pousser un commit (ou cliquer **Run workflow** dans l'onglet Actions).
+4. Le site sera dispo à `https://<votre-username>.github.io/<nom-du-repo>/`.
+
+> ℹ️ Sans backend, le formulaire de contact **ouvre votre client mail (mailto:)** au lieu d'envoyer une requête HTTP. Il reste donc fonctionnel pour le visiteur.
+
+## 🎯 Autres options de déploiement
+
+### Vercel / Netlify
+Importer le repo sur la plateforme — la config (`vercel.json` / `netlify.toml`) est détectée automatiquement.
+
+### Render (fullstack avec formulaire + base de données)
+1. Pousser le repo sur GitHub.
+2. Sur [render.com](https://render.com) → **New → Blueprint** → sélectionner le repo.
+3. Render détecte `render.yaml` et crée 2 services (frontend + backend).
+4. Renseigner les variables d'env marquées `sync: false` (MongoDB Atlas, CORS, etc.).
+
+## 🛠️ Développement local
 
 ### Frontend
 ```bash
@@ -24,38 +50,17 @@ yarn install
 yarn start          # http://localhost:3000
 ```
 
-### Backend
+### Backend (optionnel)
 ```bash
 cd backend
 pip install -r requirements.txt
-# Fichier .env requis : MONGO_URL, DB_NAME, CORS_ORIGINS
+# .env requis : MONGO_URL, DB_NAME, CORS_ORIGINS
 uvicorn server:app --host 0.0.0.0 --port 8001 --reload
 ```
 
-## Déploiement
+## ✏️ Édition du contenu
 
-### Option 1 — Render (recommandé)
-1. Pousser le repo sur GitHub.
-2. Sur [render.com](https://render.com) → New → Blueprint → sélectionner le repo.
-3. Render détecte `render.yaml` et crée 2 services (frontend statique + backend).
-4. Renseigner les variables d'env marquées `sync: false` :
-   - `portfolio-backend` : `MONGO_URL` (ex. MongoDB Atlas), `CORS_ORIGINS` (URL du frontend Render)
-   - `portfolio-frontend` : `REACT_APP_BACKEND_URL` (URL du backend Render)
-5. Redéployer si besoin après avoir saisi les variables.
-
-> **Sans `render.yaml`** : dans Render → New → Static Site → repo → **Root Directory = `frontend`**, build = `yarn install && yarn build`, publish = `build`.
-
-### Option 2 — Vercel (frontend uniquement)
-Importer le repo → Vercel lit `vercel.json` automatiquement. Renseigner `REACT_APP_BACKEND_URL` dans Environment Variables.
-
-### Option 3 — Netlify (frontend uniquement)
-Importer le repo → Netlify lit `netlify.toml` automatiquement. Renseigner `REACT_APP_BACKEND_URL` dans Environment Variables.
-
-> Le backend nécessite un hébergement Python (Render, Railway, Fly.io…) + une base MongoDB (MongoDB Atlas gratuit).
-
-## Édition du contenu
-
-Toutes les données du portfolio (identité, parcours, compétences, etc.) sont centralisées dans :
+Toutes les données du portfolio sont centralisées dans :
 
 ```
 frontend/src/data/portfolioData.js

@@ -8,7 +8,11 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { portfolioData as d } from "@/data/portfolioData";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// Si pas de backend configuré (ex: déploiement statique GitHub Pages),
+// le formulaire ouvre le client mail de l'utilisateur en mailto:
+const USE_MAILTO_FALLBACK = !BACKEND_URL;
+const API = BACKEND_URL ? `${BACKEND_URL}/api` : null;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -17,23 +21,39 @@ export default function Contact() {
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
+  const sendViaMailto = () => {
+    const subject = encodeURIComponent(
+      form.subject?.trim() || `Contact portfolio — ${form.name}`
+    );
+    const body = encodeURIComponent(
+      `Bonjour Ennadhir,\n\n${form.message}\n\n—\n${form.name}\n${form.email}`
+    );
+    window.location.href = `mailto:${d.contact.email}?subject=${subject}&body=${body}`;
+    toast.success("Ouverture de votre client mail…");
+    setForm({ name: "", email: "", subject: "", message: "" });
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Merci de remplir au moins le nom, l'email et le message.");
       return;
     }
+
+    if (USE_MAILTO_FALLBACK) {
+      sendViaMailto();
+      return;
+    }
+
     setLoading(true);
     try {
       await axios.post(`${API}/contact`, form);
       toast.success("Message envoyé ! Je reviendrai vers vous rapidement.");
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
-      const msg =
-        err?.response?.data?.detail?.[0]?.msg ||
-        err?.response?.data?.detail ||
-        "Impossible d'envoyer le message. Réessayez plus tard.";
-      toast.error(typeof msg === "string" ? msg : "Erreur d'envoi.");
+      // Si le backend est down/inaccessible, on bascule en mailto pour ne pas perdre le message
+      toast.message("Backend indisponible — ouverture du mail…");
+      sendViaMailto();
     } finally {
       setLoading(false);
     }
@@ -178,10 +198,18 @@ export default function Contact() {
               ) : (
                 <>
                   <Send size={16} className="mr-2" />
-                  Envoyer le message
+                  {USE_MAILTO_FALLBACK ? "Ouvrir mon mail" : "Envoyer le message"}
                 </>
               )}
             </Button>
+            {USE_MAILTO_FALLBACK && (
+              <p
+                className="text-xs font-mono text-[hsl(var(--text-muted))] pt-2"
+                data-testid="contact-mailto-notice"
+              >
+                ⓘ Ce formulaire ouvre votre client mail (le portfolio est hébergé en statique).
+              </p>
+            )}
           </form>
         </div>
       </div>
