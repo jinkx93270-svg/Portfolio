@@ -16,39 +16,52 @@ concurrency:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: yarn
-          cache-dependency-path: frontend/yarn.lock
 
-      - name: Install
-        run: yarn install --frozen-lockfile
+      - name: Enable Corepack & activate Yarn 1
+        run: corepack enable
 
-      - name: Build
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --network-timeout 600000
+
+      - name: Build (production)
         env:
-          # Pas de backend pour GitHub Pages → le formulaire bascule en mailto:
+          # Pas de backend → le formulaire bascule en mailto:
           REACT_APP_BACKEND_URL: ""
+          # CI=true ferait échouer le build sur les warnings ESLint
           CI: "false"
+          # Évite les soucis de mémoire sur certains runners
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: yarn build
+
+      - name: Verify build output
+        run: |
+          ls -la build/
+          test -f build/index.html || (echo "❌ index.html manquant" && exit 1)
+          echo "✅ Build OK"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/build
 
   deploy:
+    name: Deploy
     needs: build
     runs-on: ubuntu-latest
     environment:
